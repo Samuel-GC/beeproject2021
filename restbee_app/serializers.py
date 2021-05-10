@@ -11,16 +11,17 @@ class add_data_Serializer(serializers.ModelSerializer):
 	class Meta:
 		model = add_data
 		fields = (
-			'nombre',
+			"nombre",
+			"ubicacion",
 			"clima" ,
-			"temp_Ext"
+			"temp_Ext",
 			"temp_int",
 			"humedad_int",
 			"peso_colmena",
 			"poblacion",
 			"comida" ,
-			"piquera_abierta",
-			"reina_dentro",
-			"revision"
+			"piquera",
+			"reina",
+			"revision",
 		)
 

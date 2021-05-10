@@ -17,8 +17,8 @@ class add_data(models.Model):
     peso_colmena= models.FloatField(blank=True,default=0)
     poblacion= models.FloatField(blank=True,default=0)
     comida= models.FloatField(blank=True,default=0)
-    piquera_abierta=  models.CharField(max_length=255,blank=True,default="Cerrada")
-    reina_dentro= models.CharField(max_length=255,blank=True,default="Adentro")
+    piquera=  models.CharField(max_length=255,blank=True,default="Cerrada")
+    reina= models.CharField(max_length=255,blank=True,default="Adentro")
     revision= models.CharField(max_length=255,blank=True,default="No revisado")
 
     def __str__(self):
