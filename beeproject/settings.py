@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#&n1y$y_0&4u#7y5kbp#f8rl4io8t#8*mubiri^96hbq^e-i6g'
+SECRET_KEY = '634r=5dm6a2^m^iu&1mvpg+zd!3#i2w7(t+gf@^*#qxbg45t1!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['beeproject2021.pythonanywhere.com','127.0.0.1','192.168.0.7']
+
 
 # Application definition
 
@@ -128,6 +129,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
