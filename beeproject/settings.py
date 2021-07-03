@@ -26,7 +26,7 @@ SECRET_KEY = '0t!*6zof8e*i^-1=q70n)cc9mls^d@*akqxsjxlxgvoe5*!4#4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','192.168.0.7']
 
 
 # Application definition
@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'token_app',
     'restbee_app',
 ]
+
+LOGIN_REDIRECT_URL ="/bee_project/"
+LOGOUT_REDIRECT_URL ="/accounts/login/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -108,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/Lima'
 

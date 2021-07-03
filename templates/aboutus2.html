@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="{% static 'style/wireframe.css' %}">
 </head>
 
-<body class="bg-warning">
+<body>
+  
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <div class="row">
@@ -31,53 +32,38 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar11">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item" style=""> <a class="nav-link" href="/Instructions/">Instructions</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/about_us/">About us</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/accounts/login/" >Login</a> </li>
+
         </ul>
       </div>
     </div>
   </nav>
-  <div class="py-5">
+  <div class="bg-warning py-2 text-justify" style="">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center my-3">Bienvenido</h1>
+          <h1 class="text-center my-3" style="">About us</h1>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6">
-               <form id="c_form-h" enctype="multipart/form-data" action="" method="post"> {% csrf_token %}
-              <h3 class="text-left" >User :</h3>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group"><input  class="form-control" id="user" name="user"></div>
-            </div>
-            <div class="col-md-6">
-              <h3 class="text-left">Password :</h3>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group"><input type="password" class="form-control" id="password" name="password"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group"></div>
-            </div>
-            <div class="col-md-6">
-              <button type="submit" class="btn btn-primary align-items-center text-center mb-3 w-100">Login</button>
-            </div>
-            </form>
-          </div>
+      </div>
+    </div>
+    <div class="container text-center">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <h5 class="text-justify my-5" style="">Somos un equipo de ingenieros mecatrónicos que se dedican al desarrollo de proyectos de automatizacion y control con miras de utilizar la tecnologia para contruir una sociedad moderna.</h5>
         </div>
-        <div class="col-md-6" style="">
-          <p class="text-justify my-0" style="">"Bee project " es un proyecto en desarrollo que se encarga del monitoreo y supervisión de colmenas de abejas, el cual su función es ayudar a los apicultores con métodos modernos de supervisión.Agradecemos el apoyo del Centro experimental Wayllapampa de la universidad Nacional San Cristóbal de Huamanga el cual nos permitió el desarrollo inicial de este proyecto y fueron nuestra inspiración para dar el gran paso a la modernización del sector apicola .</p>
+        <div class="col-lg-4 col-md-4 p-4"> <img class="d-block mb-3 mx-auto rounded-circle" src="{% static 'icons/sam.jpg' %}" alt="Card image cap" width="250" height="250">
+          <h4> <b>Samuel E. García Cardenas</b></h4>
+          <p class="mb-0">Email: garciacardenas96@gmail.com</p>
+        </div>
+        <div class="col-lg-4 col-md-4 p-4" style=""> <img class="d-block mb-3 mx-auto rounded-circle" src="{% static 'icons/fabio.jpg' %}" alt="Card image cap" width="250" height="250">
+          <h4> <b>Fabio Jeri Alejos</b></h4>
+          <p class="mb-0">Email: fabiojeri.a@gmail.com</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="bg-warning py-2 w-100 h-25" style=""></div>
   <div class="py-3 bg-dark" style="">
     <div class="container">
       <div class="row">

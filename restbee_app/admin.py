@@ -5,5 +5,6 @@ from .models import *
 #--------------------admins colmenas add------------------
 ###################################################################
 
-admin.site.register(add_data)
+admin.site.register(Add_data)
 
+admin.site.register(No_revisado)

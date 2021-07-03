@@ -33,9 +33,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar11">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"> <a class="nav-link" href="/" >Home</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/Instructions/">Instructions</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="about_us/">About us</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/bee_project/" >Home</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/instructions/">Instructions</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/descargar/">Descargar</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/about_us/">About us</a> </li>
+          <li class="nav-item"><a class="btn navbar-btn ml-md-2 btn-secondary" href="/accounts/logout/">Log out</a></li>
         </ul>
       </div>
     </div>
@@ -49,15 +51,15 @@
           <div class="row">
             <div class="col-md-6 text-left">
               <h4 class="">Temperatura Exterior&nbsp; °C :</h4>
-              <h1 class="">{{dato1}}&nbsp;</h1>
-              <h3 class="text-left">Actualizado :</h3>
-              <h5 class="text-left"   style="">{{fecha}}</h5>
+              <h1 class="">{{col_s_1.temp_Ext}}&nbsp;</h1>
+        <!--       <h3 class="text-left">Actualizado :</h3>
+              <h5 class="text-left"   style="">{{fecha}}</h5> -->
               <div class="col-md-12">
               </div>
             </div>
             <div class="col-md-6 text-left">
               <h4 class="">Clima:</h4>
-              <h1 class="">{{clima}}&nbsp;</h1>
+              <h1 class="">{{col_s_1.clima}}&nbsp;</h1>
             </div>
           </div>
         </div>
@@ -73,48 +75,52 @@
             <div class="card-body">
               <h1   style="" class="text-center">Colmena 1</h1>
               <div class="row">
+                  <div class="col-md-12">
+                  <h3 class=""   style="">Actualizado :</h3>
+                  <h5 class="">{{col_s_1.fecha}}</h5>
+                </div>
                 <div class="col-md-12">
-                  <h3 class=""   style="">Temperatura&nbsp;°C :</h3>
-                  <h5 class="">{{dato2}}</h5>
+                  <h3 class=""   style="">Temperatura :</h3>
+                  <h5 class="">{{col_s_1.temp_int}} °C </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Humedad % :</h3>
-                  <h5 class="">{{dato3}}</h5>
+                  <h3 class="">Humedad :</h3>
+                  <h5 class="">{{col_s_1.humedad_int}} % </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="" style="">Peso Kg :</h3>
-                  <h5 class="">{{dato4}}</h5>
+                  <h3 class="" style="">Peso :</h3>
+                  <h5 class="">{{col_s_1.peso_colmena}} Kg </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Población&nbsp; :</h3>
-                  <h5 class="">{{dato5}}</h5>
+                  <h3 class="">Población& :</h3>
+                  <h5 class="">{{col_s_1.poblacion}}</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Comida %&nbsp; :</h3>
-                  <h5 class="">{{dato6}}</h5>
+                  <h3 class="">Comida :</h3>
+                  <h5 class="">{{col_s_1.comida}} %</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Piquera :</h3>
-                  <h5 class="">{{dato7}}</h5>
+                  <h5 class="">{{col_s_1.piquera}}</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Reina :</h3>
-                  <h5 class="">{{dato8}}</h5>
+                  <h5 class="">{{col_s_1.reina}}</h5>
                 </div>
               </div>
-            </div><a class="btn btn-primary"  id="download_form_file" href="{% static 'db/colmena1.sqlite3' %}"><i class="fa fa-download fa-fw"></i>&nbsp;Descargar</a>
+            </div>
           </div>
         </div>
         <div class="col-md-6 p-3">
@@ -123,48 +129,53 @@
             <div class="card-body">
               <h1 class="text-center">Colmena 2</h1>
               <div class="row">
+
+                  <div class="col-md-12">
+                  <h3 class=""   style="">Actualizado :</h3>
+                  <h5 class="">{{col_s_2.fecha}}</h5>
+                </div>
                 <div class="col-md-12">
-                  <h3 class=""   style="">Temperatura&nbsp;°C :</h3>
-                  <h5 class="">{{dato9}}</h5>
+                  <h3 class=""   style="">Temperatura :</h3>
+                  <h5 class="">{{col_s_2.temp_int}} °C </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Humedad % :</h3>
-                  <h5 class="">{{dato10}}</h5>
+                  <h3 class="">Humedad :</h3>
+                  <h5 class="">{{col_s_2.humedad_int}} %</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="" style="">Peso Kg :</h3>
-                  <h5 class="">{{dato11}}</h5>
+                  <h3 class="" style="">Peso :</h3>
+                  <h5 class="">{{col_s_2.peso_colmena}} Kg </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Población&nbsp; :</h3>
-                  <h5 class="">{{dato12}}</h5>
+                  <h3 class="">Población :</h3>
+                  <h5 class="">{{col_s_2.poblacion}}</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Comida %&nbsp; :</h3>
-                  <h5 class="">{{dato13}}</h5>
+                  <h3 class="">Comida :</h3>
+                  <h5 class="">{{col_s_2.comida}} %</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Piquera :</h3>
-                  <h5 class="">{{dato14}}</h5>
+                  <h5 class="">{{col_s_2.piquera}}</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Reina :</h3>
-                  <h5 class="">{{dato15}}</h5>
+                  <h5 class="">{{col_s_2.reina}}</h5>
                 </div>
               </div>
-            </div><a class="btn btn-primary" href="{% static 'db/colmena2.sqlite3' %}"><i class="fa fa-download fa-fw"></i>&nbsp;Descargar</a>
+            </div> 
           </div>
         </div>
       </div>
@@ -176,48 +187,53 @@
               <div class="card-body">
                 <h1 class="text-center">Colmena 3</h1>
                 <div class="row">
+
                   <div class="col-md-12">
-                    <h3 class=""   style="">Temperatura&nbsp;°C :</h3>
-                    <h5 class="">{{dato16}}</h5>
-                  </div>
+                  <h3 class=""   style="">Actualizado :</h3>
+                  <h5 class="">{{col_s_3.fecha}}</h5>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="">Humedad % :</h3>
-                    <h5 class="">{{dato17}}</h5>
-                  </div>
+                <div class="col-md-12">
+                  <h3 class=""   style="">Temperatura :</h3>
+                  <h5 class="">{{col_s_3.temp_int}} °C</h5>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="" style="">Peso Kg :</h3>
-                    <h5 class="">{{dato18}}</h5>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="">Humedad :</h3>
+                  <h5 class="">{{col_s_3.humedad_int}} %</h5>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="">Población&nbsp; :</h3>
-                    <h5 class="">{{dato19}}</h5>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="" style="">Peso :</h3>
+                  <h5 class="">{{col_s_3.peso_colmena}} Kg</h5>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="">Comida %&nbsp; :</h3>
-                    <h5 class="">{{dato20}}</h5>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="">Población :</h3>
+                  <h5 class="">{{col_s_3.poblacion}}</h5>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="">Piquera :</h3>
-                    <h5 class="">{{dato21}}</h5>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="">Comida :</h3>
+                  <h5 class="">{{col_s_3.comida}} %</h5>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="">Reina :</h3>
-                    <h5 class="">{{dato22}}</h5>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="">Piquera :</h3>
+                  <h5 class="">{{col_s_3.piquera}}</h5>
                 </div>
-              </div><a class="btn btn-primary" href="{% static 'db/colmena3.sqlite3' %}"><i class="fa fa-download fa-fw"></i>&nbsp;Descargar</a>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="">Reina :</h3>
+                  <h5 class="">{{col_s_3.reina}}</h5>
+                </div>
+                </div>
+              </div> 
             </div>
           </div>
         </div>
@@ -230,12 +246,16 @@
             <div class="card-body">
               <h1 class="text-center">Colmena no supervisada 1</h1>
               <div class="row">
+                  <div class="col-md-12">
+                 <h3 class=""   style="">Actualizado :</h3>
+                  <h5 class="">{{col_n_1.fecha}}</h5>
+                </div>
                 <div class="col-md-12">
-                  <h3 class=""   style="">Temperatura&nbsp;°C :</h3>
-                  <h5 class="">{{dato23}}</h5>
+                  <h3 class=""   style="">Temperatura :</h3>
+                  <h5 class="">{{col_n_1.temp_int}} °C</h5>
                 </div>
               </div>
-            </div><a class="btn btn-primary" href="{% static 'db/colmenaNo.sqlite3' %}"><i class="fa fa-download fa-fw"></i>&nbsp;Descargar</a>
+            </div> 
           </div>
         </div>
         <div class="col-md-6 p-3">
@@ -244,12 +264,16 @@
             <div class="card-body">
               <h1 class="text-center">Colmena no supervisada 2</h1>
               <div class="row">
+                               <div class="col-md-12">
+                  <h3 class=""   style="">Actualizado :</h3>
+                  <h5 class="">{{col_n_2.fecha}}</h5>
+                </div>
                 <div class="col-md-12">
-                  <h3 class=""   style="">Temperatura&nbsp;°C :</h3>
-                  <h5 class="">{{dato24}}</h5>
+                  <h3 class=""   style="">Temperatura :</h3>
+                  <h5 class="">{{col_n_2.temp_int}} °C</h5>
                 </div>
               </div>
-            </div><a class="btn btn-primary" href="{% static 'db/colmenaNo.sqlite3' %}"><i class="fa fa-download fa-fw"></i>&nbsp;Descargar</a>
+            </div> 
           </div>
         </div>
       </div>

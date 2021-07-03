@@ -6,10 +6,10 @@ from restbee_app.models import *
 # # ------------------Serialaizer add ------------------------------
 # ###################################################################
 
-class add_data_Serializer(serializers.ModelSerializer):
+class Add_data_Serializer(serializers.ModelSerializer):
 
 	class Meta:
-		model = add_data
+		model = Add_data
 		fields = (
 			"nombre",
 			"ubicacion",
@@ -25,3 +25,13 @@ class add_data_Serializer(serializers.ModelSerializer):
 			"revision",
 		)
 
+
+class No_revisado_Serializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = No_revisado
+		fields = (
+			"nombre",
+			"ubicacion",
+			"temp_int",
+		)

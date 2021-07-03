@@ -6,7 +6,7 @@ import os
 #--------------------model exterior-----------------------------
 ###################################################################
 
-class add_data(models.Model):
+class Add_data(models.Model):
     fecha= models.DateTimeField(blank=True, auto_now_add=True, auto_now=False)
     nombre=models.CharField(max_length=255, blank=True,default="No registrado")
     ubicacion= models.CharField(max_length=255, blank=True,default="No registrado")
@@ -22,4 +22,13 @@ class add_data(models.Model):
     revision= models.CharField(max_length=255,blank=True,default="No revisado")
 
     def __str__(self):
-        return str(self.id)
+        return f'{self.fecha} {self.ubicacion} {self.nombre}'
+
+class No_revisado(models.Model):
+    fecha= models.DateTimeField(blank=True, auto_now_add=True, auto_now=False)
+    nombre=models.CharField(max_length=255, blank=True,default="No registrado")
+    ubicacion= models.CharField(max_length=255, blank=True,default="No registrado")
+    temp_int= models.FloatField(blank=True,default=0)
+
+    def __str__(self):
+        return f'{self.fecha} {self.ubicacion} {self.nombre}'
