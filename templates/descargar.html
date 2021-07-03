@@ -184,6 +184,7 @@ else{
 
 
     saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'Reporte.xlsx');
+    SlimNotifierJs.notification('success','¡Operación Exitosa!', 'Se ha descargado exitosamente el archivo Excel', 3000);
     });
 
 
