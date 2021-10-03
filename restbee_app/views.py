@@ -48,10 +48,10 @@ class descargar_rest(APIView):
                 "Temperatura Interna",
                 "Humedad",
                 "Peso",
-                "Poblacion",
+                # "Poblacion",
                 "Comida",
                 "Piquera",
-                "Reina",
+                # "Reina",
                 "Revision",])
             fecha1 = request.data.get("fecha1")
             fecha2 = request.data.get("fecha2")
@@ -61,17 +61,17 @@ class descargar_rest(APIView):
                 diccionario =[dato[i].id,
 					dato[i].fecha.strftime("%Y-%m-%d %H:%M:%S") ,
 					dato[i].nombre,
-					dato[i].ubicacion,
+					dato[i].local,
 					dato[i].clima,
-					dato[i].temp_Ext,
-					dato[i].temp_int,
-					dato[i].humedad_int,
+					dato[i].t_Ext,
+					dato[i].t_int,
+					dato[i].humedad,
 					dato[i].peso_colmena,
-					dato[i].poblacion,
+					# dato[i].poblacion,
 					dato[i].comida,
 					dato[i].piquera,
-					dato[i].reina,
-					dato[i].revision,]  
+					# dato[i].reina,
+					dato[i].revision.strftime("%Y-%m-%d %H:%M:%S"),]  
     
                 lista.append(diccionario)
 

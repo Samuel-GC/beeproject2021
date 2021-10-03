@@ -51,7 +51,7 @@
           <div class="row">
             <div class="col-md-6 text-left">
               <h4 class="">Temperatura Exterior&nbsp; °C :</h4>
-              <h1 class="">{{col_s_1.temp_Ext}}&nbsp;</h1>
+              <h1 class="">{{col_s_1.t_Ext}}&nbsp;</h1>
         <!--       <h3 class="text-left">Actualizado :</h3>
               <h5 class="text-left"   style="">{{fecha}}</h5> -->
               <div class="col-md-12">
@@ -81,27 +81,27 @@
                 </div>
                 <div class="col-md-12">
                   <h3 class=""   style="">Temperatura :</h3>
-                  <h5 class="">{{col_s_1.temp_int}} °C </h5>
+                  <h5 class="">{{col_s_1.t_int}} °C </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Humedad :</h3>
-                  <h5 class="">{{col_s_1.humedad_int}} % </h5>
+                  <h5 class="">{{col_s_1.humedad}} % </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="" style="">Peso :</h3>
-                  <h5 class="">{{col_s_1.peso_colmena}} Kg </h5>
+                  <h5 class="">{{col_s_1.peso}} Kg </h5>
                 </div>
               </div>
-              <div class="row">
+             <!--  <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Población& :</h3>
                   <h5 class="">{{col_s_1.poblacion}}</h5>
-                </div>
-              </div>
+                </div> -->
+              <!-- </div> -->
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Comida :</h3>
@@ -116,13 +116,14 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Reina :</h3>
-                  <h5 class="">{{col_s_1.reina}}</h5>
+                  <h3 class="">Revisado :</h3>
+                  <h5 class="">{{col_s_1.revision}}</h5>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        
         <div class="col-md-6 p-3">
           <div class="card box-shadow">
             <img class="card-img-top w-50 mx-auto" src="{% static 'icons/bee-hive.png' %}">
@@ -136,27 +137,27 @@
                 </div>
                 <div class="col-md-12">
                   <h3 class=""   style="">Temperatura :</h3>
-                  <h5 class="">{{col_s_2.temp_int}} °C </h5>
+                  <h5 class="">{{col_s_2.t_int}} °C </h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Humedad :</h3>
-                  <h5 class="">{{col_s_2.humedad_int}} %</h5>
+                  <h5 class="">{{col_s_2.humedad}} %</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="" style="">Peso :</h3>
-                  <h5 class="">{{col_s_2.peso_colmena}} Kg </h5>
+                  <h5 class="">{{col_s_2.peso}} Kg </h5>
                 </div>
               </div>
-              <div class="row">
+<!--               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Población :</h3>
                   <h5 class="">{{col_s_2.poblacion}}</h5>
-                </div>
-              </div>
+                </div> -->
+              <!-- </div> -->
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Comida :</h3>
@@ -171,15 +172,15 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="">Reina :</h3>
-                  <h5 class="">{{col_s_2.reina}}</h5>
+                  <h3 class="">Revisado :</h3>
+                  <h5 class="">{{col_s_2.revision}}</h5>
                 </div>
               </div>
             </div> 
           </div>
         </div>
       </div>
-      <div class="row">
+     <!--  <div class="row">
         <div class="col-md-6 p-3">
           <div class="col-md-12 p-3">
             <div class="card box-shadow">
@@ -194,19 +195,19 @@
                 </div>
                 <div class="col-md-12">
                   <h3 class=""   style="">Temperatura :</h3>
-                  <h5 class="">{{col_s_3.temp_int}} °C</h5>
+                  <h5 class="">{{col_s_3.t_int}} °C</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Humedad :</h3>
-                  <h5 class="">{{col_s_3.humedad_int}} %</h5>
+                  <h5 class="">{{col_s_3.humedad}} %</h5>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <h3 class="" style="">Peso :</h3>
-                  <h5 class="">{{col_s_3.peso_colmena}} Kg</h5>
+                  <h5 class="">{{col_s_3.peso}} Kg</h5>
                 </div>
               </div>
               <div class="row">
@@ -236,9 +237,9 @@
               </div> 
             </div>
           </div>
-        </div>
-        <div class="col-md-6 p-3"></div>
-      </div>
+        </div> -->
+     <!--    <div class="col-md-6 p-3"></div>
+      </div> -->
       <div class="row">
         <div class="col-md-6 p-3">
           <div class="card box-shadow">
@@ -252,7 +253,7 @@
                 </div>
                 <div class="col-md-12">
                   <h3 class=""   style="">Temperatura :</h3>
-                  <h5 class="">{{col_n_1.temp_int}} °C</h5>
+                  <h5 class="">{{col_n_1.t_int}} °C</h5>
                 </div>
               </div>
             </div> 
@@ -270,7 +271,7 @@
                 </div>
                 <div class="col-md-12">
                   <h3 class=""   style="">Temperatura :</h3>
-                  <h5 class="">{{col_n_2.temp_int}} °C</h5>
+                  <h5 class="">{{col_n_2.t_int}} °C</h5>
                 </div>
               </div>
             </div> 

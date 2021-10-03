@@ -12,19 +12,18 @@ class Add_data_Serializer(serializers.ModelSerializer):
 		model = Add_data
 		fields = (
 			"nombre",
-			"ubicacion",
+			"local",
 			"clima" ,
-			"temp_Ext",
-			"temp_int",
-			"humedad_int",
-			"peso_colmena",
-			"poblacion",
+			"t_Ext",
+			"t_int",
+			"humedad",
+			"peso",
+			# "poblacion",
 			"comida" ,
 			"piquera",
-			"reina",
+			# "reina",
 			"revision",
 		)
-
 
 class No_revisado_Serializer(serializers.ModelSerializer):
 
@@ -32,6 +31,6 @@ class No_revisado_Serializer(serializers.ModelSerializer):
 		model = No_revisado
 		fields = (
 			"nombre",
-			"ubicacion",
-			"temp_int",
+			"local",
+			"t_int",
 		)
