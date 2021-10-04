@@ -14,8 +14,8 @@ urlpatterns = [
 ###################################################################
 
     path('add/data/',agregar_data.as_view()),
-    path('add/data/',agregar_no_revisado.as_view()),
-    
+    path('add/data2/',agregar_no_revisado.as_view()),
+    path('add/error/',agregar_error.as_view()),
 ########################-Rest - JS-########################
 	path("web/descargar/",descargar_rest.as_view()),
 ###################################################################
@@ -26,7 +26,7 @@ urlpatterns = [
 	path('instructions/', instrucciones), #pagina de instrucciones
 	path('descargar/', descargar), #pagina de descarga
 	path('about_us/', about),# about con login
-
+	path('historial/error/', error),# Historial de errores con login
 	path('aboutus/', about2), # about sin login
 ###################################################################
 #------------------------ Login------------------------------------

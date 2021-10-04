@@ -8,3 +8,5 @@ from .models import *
 admin.site.register(Add_data)
 
 admin.site.register(No_revisado)
+
+admin.site.register(Errors)

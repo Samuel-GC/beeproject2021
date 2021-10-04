@@ -48,18 +48,18 @@
 
         <div class="col-md-12 text-center">
 
-          <h1 class="text-center my-3" style=""  >Colmenas del Centro Experimental Wayllapampa</h1>
-          <p class="lead text-muted">Bienvenido&nbsp; {{usuario}}</p>
+          <h1 class="text-center my-3" style=""  >Historial de emergencias</h1>
+         <!--  <p class="lead text-muted">Bienvenido&nbsp; {{usuario}}</p>
 
           <div class="row">
 
             <div class="col-md-4 text-left">
               <h4 class="">Temperatura Exterior&nbsp; °C :</h4>
               <h1 class="">{{col_s_1.t_Ext}}&nbsp;</h1>
-        <!--       <h3 class="text-left">Actualizado :</h3>
+              <h3 class="text-left">Actualizado :</h3>
               <h5 class="text-left"   style="">{{fecha}}</h5> -->
-            <!--   <div class="col-md-12">
-              </div> -->
+          <!--     <div class="col-md-12">
+              </div>
             </div>
             <div class="col-md-4 text-left">
               <h4 class="">Clima:</h4>
@@ -68,19 +68,59 @@
  <div class="col-md-4 text-left">
   
 
-              <h4 class=""><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><a class="" href="/historial/error/">&nbsp;Emergencias:</a></h4>
-              <h1 class="">&nbsp;&nbsp;&nbsp;{{error}} </h1>
+              <h4 class=""><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><a class="" href="/historial/error">&nbsp;Emergencias:</a></h4>
+              <h1 class="">&nbsp;&nbsp;&nbsp;0 </h1 --> 
         <!--       <h3 class="text-left">Actualizado :</h3>
               <h5 class="text-left"   style="">{{fecha}}</h5> -->
             <!--   <div class="col-md-12">
               </div> -->
-            </div>
+            <!-- </div> -->
+              <div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered ">
+              <thead class="thead-dark">
+                <tr>
+                  <th class="text-center">Fecha</th>
+                  <th class="text-center">Información</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for errors in error %}
+                <tr>
+                  <td class="text-center">
+                  <h5>{{errors.fecha}}</h5>
+                  </td>
+                 <td class="text-center">
+                <h5>{{errors.error}}</h5>
+               </td>
+                </tr>
+           {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="py-4 bg-light" style="">
+              <div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!--   <div class="py-4 bg-light" style="">
     <div class="container">
       <div class="row">
         <div class="col-md-6 p-3">
@@ -109,14 +149,14 @@
                   <h3 class="" style="">Peso :</h3>
                   <h5 class="">{{col_s_1.peso}} Kg </h5>
                 </div>
-              </div>
+              </div> -->
              <!--  <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Población& :</h3>
                   <h5 class="">{{col_s_1.poblacion}}</h5>
                 </div> -->
               <!-- </div> -->
-              <div class="row">
+             <!--  <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Comida :</h3>
                   <h5 class="">{{col_s_1.comida}} %</h5>
@@ -136,9 +176,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         
-        <div class="col-md-6 p-3">
+   <!--      <div class="col-md-6 p-3">
           <div class="card box-shadow">
             <img class="card-img-top w-50 mx-auto" src="{% static 'icons/bee-hive.png' %}">
             <div class="card-body">
@@ -166,13 +206,13 @@
                   <h5 class="">{{col_s_2.peso}} Kg </h5>
                 </div>
               </div>
-<!--               <div class="row">
+              <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Población :</h3>
                   <h5 class="">{{col_s_2.poblacion}}</h5>
                 </div> -->
               <!-- </div> -->
-              <div class="row">
+       <!--        <div class="row">
                 <div class="col-md-12">
                   <h3 class="">Comida :</h3>
                   <h5 class="">{{col_s_2.comida}} %</h5>
@@ -193,8 +233,8 @@
             </div> 
           </div>
         </div>
-      </div>
-     <!--  <div class="row">
+      </div> -->
+<!--       <div class="row">
         <div class="col-md-6 p-3">
           <div class="col-md-12 p-3">
             <div class="card box-shadow">
@@ -251,9 +291,9 @@
               </div> 
             </div>
           </div>
-        </div> -->
-     <!--    <div class="col-md-6 p-3"></div>
-      </div> -->
+        </div>
+        <div class="col-md-6 p-3"></div>
+      </div>
       <div class="row">
         <div class="col-md-6 p-3">
           <div class="card box-shadow">
@@ -272,8 +312,8 @@
               </div>
             </div> 
           </div>
-        </div>
-        <div class="col-md-6 p-3">
+        </div> -->
+       <!--  <div class="col-md-6 p-3">
           <div class="card box-shadow">
             <img class="card-img-top w-50 mx-auto" src="{% static 'icons/bee-hiveblack.png' %}">
             <div class="card-body">
@@ -293,7 +333,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="py-3 bg-dark">
     <div class="container">
       <div class="row">

@@ -34,3 +34,11 @@ class No_revisado_Serializer(serializers.ModelSerializer):
 			"local",
 			"t_int",
 		)
+
+class Errors_Serializer(serializers.ModelSerializer):
+	class Meta:
+		model = Errors
+		fields = (
+			"error",
+	
+		)

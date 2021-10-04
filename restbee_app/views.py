@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from datetime import timedelta
+from django.utils.timezone import now
+from django.utils import timezone
 
 # ------------------------- Add Datos---------------------
 
@@ -31,6 +33,12 @@ class agregar_no_revisado(generics.CreateAPIView):  # READY
     queryset = No_revisado.objects.all()
     serializer_class = No_revisado_Serializer
 
+class agregar_error(generics.CreateAPIView):  # READY
+
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Errors.objects.all()
+    serializer_class = Errors_Serializer
 
 class descargar_rest(APIView):
     authentication_classes = [authentication.TokenAuthentication]
@@ -101,7 +109,10 @@ def bee(request):
 			col3 = Add_data.objects.filter(nombre="colmena_3").last()
 			col_ns_1 = No_revisado.objects.filter(nombre="colmena_ns_1").last()
 			col_ns_2 = No_revisado.objects.filter(nombre="colmena_ns_2").last()
-
+			# print(now())
+			error1 = Errors.objects.filter(fecha__range=[now()-timedelta(days=1), now()])
+			error=len(error1)
+			# print(error)
 			# urgente=pedidos_generados.filter(prioridad_pedido="Urgente")
 			# regular=pedidos_generados.filter(prioridad_pedido="Regular")
 			diccionario = {
@@ -111,6 +122,7 @@ def bee(request):
 			"col_s_3":col3 ,
 			"col_n_1":col_ns_1 ,
 			"col_n_2":col_ns_2,
+			"error":error,
 			}
 			return render(request,"bee.html",diccionario)
 
@@ -135,7 +147,25 @@ def about(request):
 def descargar(request):
 	return render(request,"descargar.html")
 
+@login_required
+def error(request):
+	try:
+		if request.method == "GET":
+			error1=Errors.objects.filter(fecha__range=[now()-timedelta(days=30), now()])
+			# print(error)
+			error=error1.order_by('-fecha')
+			diccionario = {
+			
+			"error":error,
 
+			}
+			return render(request,"error.html",diccionario)
+
+		else:
+			return render(request,"bee.html")
+	except:
+		return redirect('/accounts/login/')	
+	# return render(request,"error.html")
 	
 
 def about2(request):
