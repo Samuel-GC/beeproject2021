@@ -5,16 +5,9 @@ hed = {'Authorization': 'token ' + auth_token}
 data = {
             "nombre":"colmena_1",
             "local":"Wayllapampa",
-            "clima":"LLuvia",
-            "t_Ext":"14",
-            "t_int":"17",
-            "humedad":"40",
-            "peso":"80",
-            # "poblacion",
-            "comida" :"30",
-            "piquera":"Cerrada",
-            # "reina",
-            "revision":"2021-10-03 19:22",
+
+            "t_int":17,
+           
 }
 
 # data2 = {'id':"1", 
@@ -23,7 +16,7 @@ data = {
 #             'Temperatura_Colmena_No_2':"3",
 # }
 
-urll = 'http://beeproject2021.pythonanywhere.com/add/data/'
+urll = 'http://beeproject2021.pythonanywhere.com/add/data2/'
 # url2 = 'http://beeproject2021.pythonanywhere.com/colmena2/'
 # url3 = 'http://beeproject2021.pythonanywhere.com/colmena3/'
 # urlno = 'http://beeproject2021.pythonanywhere.com/colmenaNo/'

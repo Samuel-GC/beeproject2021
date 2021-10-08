@@ -14,14 +14,12 @@ class Add_data_Serializer(serializers.ModelSerializer):
 			"nombre",
 			"local",
 			"clima" ,
-			"t_Ext",
+			"t_ext",
 			"t_int",
 			"humedad",
 			"peso",
-			# "poblacion",
 			"comida" ,
 			"piquera",
-			# "reina",
 			"revision",
 		)
 
@@ -40,5 +38,12 @@ class Errors_Serializer(serializers.ModelSerializer):
 		model = Errors
 		fields = (
 			"error",
+	
+		)
+class Revision_Serializer(serializers.ModelSerializer):
+	class Meta:
+		model = Revision
+		fields = (
+			"nombre",
 	
 		)

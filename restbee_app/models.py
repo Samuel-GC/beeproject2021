@@ -6,18 +6,29 @@ import os
 #--------------------model exterior-----------------------------
 ###################################################################
 
+class Revision(models.Model):
+    fecha= models.DateTimeField(blank=True, auto_now_add=True, auto_now=False)
+    nombre=models.CharField(max_length=255, blank=True,default="No registrado")
+    # revision= models.DateTimeField(blank=True, auto_now_add=False, auto_now=True)
+    class Meta:
+        verbose_name = 'Datos'
+        verbose_name_plural = 'Revisiones' 
+    def __str__(self):
+        return f'{self.fecha} {self.nombre}'
+
 class Add_data(models.Model):
     fecha= models.DateTimeField(blank=True, auto_now_add=True, auto_now=False)
     nombre=models.CharField(max_length=255, blank=True,default="No registrado")
     local= models.CharField(max_length=255, blank=True,default="No registrado")
     clima= models.CharField(max_length=255, blank=True,default="No registrado")
-    t_Ext= models.FloatField(blank=True,default=0)
+    t_ext= models.FloatField(blank=True,default=0)
     t_int= models.FloatField(blank=True,default=0)
     humedad= models.FloatField(blank=True,default=0)
     peso= models.FloatField(blank=True,default=0)
     comida= models.FloatField(blank=True,default=0)
     piquera=  models.CharField(max_length=255,blank=True,default="Cerrada")
-    revision= models.DateTimeField(blank=True, auto_now_add=False, auto_now=True)
+    id_revision = models.ForeignKey(Revision, null=True, on_delete=models.SET_NULL)
+    # revision= models.DateTimeField(blank=True, auto_now_add=False, auto_now=True)
     class Meta:
         verbose_name = 'Datos'
         verbose_name_plural = 'Colmenas_supervisadas' 
@@ -43,3 +54,4 @@ class Errors(models.Model):
         verbose_name_plural = 'Historial_de_errores' 
     def __str__(self):
         return f'{self.fecha} '
+
