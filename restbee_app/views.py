@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import timedelta
 from django.utils.timezone import now
 from django.utils import timezone
-
+import datetime
 ###########################################################
 #-----------------------Rest APP---------------------------
 ###########################################################
@@ -128,12 +128,20 @@ class descargar_rest(APIView):
                 ])
             fecha1 = request.data.get("fecha1")
             fecha2 = request.data.get("fecha2")
+            if fecha1==fecha2:
+                # print(fecha2)
+                # print(fecha1)
+                fecha2=datetime.datetime.strptime(fecha2, "%Y-%m-%d").date()
+                fecha2=fecha2+timedelta(days=1)
+                # print(fecha2)
+                # print(fecha1)
+
             dato=Add_data.objects.filter(fecha__range=[fecha1, fecha2])
             for i in range(len(dato)):
                 # print("hola")
                 try:
                     rev=dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S")
-                    print(dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S"))
+                    # print(dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S"))
                 except:
                 	rev="-"
                 # print(dato[i].id)
