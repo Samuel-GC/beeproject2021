@@ -122,6 +122,7 @@ class descargar_rest(APIView):
                 # "Poblacion",
                 "Comida",
                 "Piquera",
+                "Revision",
                 # "Reina",
                 # "Revision",
                 ])
@@ -129,7 +130,13 @@ class descargar_rest(APIView):
             fecha2 = request.data.get("fecha2")
             dato=Add_data.objects.filter(fecha__range=[fecha1, fecha2])
             for i in range(len(dato)):
-         
+                # print("hola")
+                try:
+                    rev=dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S")
+                    print(dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S"))
+                except:
+                	rev="-"
+                # print(dato[i].id)
                 diccionario =[dato[i].id,
 					dato[i].fecha.strftime("%Y-%m-%d %H:%M:%S") ,
 					dato[i].nombre,
@@ -138,10 +145,12 @@ class descargar_rest(APIView):
 					dato[i].t_ext,
 					dato[i].t_int,
 					dato[i].humedad,
-					dato[i].peso_colmena,
+					dato[i].peso,
 					# dato[i].poblacion,
 					dato[i].comida,
 					dato[i].piquera,
+					# dato[i].piquera,
+					rev,
 					# dato[i].reina,
 					# dato[i].revision.strftime("%Y-%m-%d %H:%M:%S"),
 					]  
