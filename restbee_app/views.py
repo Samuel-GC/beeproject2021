@@ -16,85 +16,166 @@ from datetime import timedelta
 from django.utils.timezone import now
 from django.utils import timezone
 import datetime
+import pathlib
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 ###########################################################
 #-----------------------Rest APP---------------------------
 ###########################################################
 
-# class agregar_data(generics.CreateAPIView):  # READY
 
-#     authentication_classes = [authentication.TokenAuthentication]
-#     permission_classes = [permissions.IsAuthenticated]
-#     queryset = Add_data.objects.all()
-#     serializer_class = Add_data_Serializer
 
-class agregar_data(generics.CreateAPIView):  # READY
+class agregar_data(APIView):  # READY
+
+	authentication_classes = [authentication.TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
+	def post(self, request, *args, **kwargs):
+		# try:
+		nombre = request.data.get("nombre")
+		local = request.data.get("local")
+		clima = request.data.get("clima")
+		exterior = float(request.data.get("t_ext"))
+		exterior=round(exterior,2)
+		interior = float(request.data.get("t_int"))
+		interior=round(interior,2)
+		humedad = float(request.data.get("humedad"))
+		humedad=round(humedad,2)
+		peso = float(request.data.get("peso"))
+		peso=round(peso,2)
+		comida = float(request.data.get("comida"))
+		comida=round(comida,1)
+		piquera = request.data.get("piquera")
+		 
+		dato = Revision.objects.filter(nombre=nombre).last()
+	 
+		datos=Add_data.objects.create(
+				nombre=nombre,
+				local=local,
+				clima=clima,
+				t_ext=exterior,
+				t_int=interior,
+				humedad=humedad,
+				peso=peso,
+				comida=comida,
+				piquera=piquera,
+				id_revision=dato,
+				)
+		direc=str(pathlib.Path().absolute())+"/restbee_app/keys.json"
+		# print(direc)
+		scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+		creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
+		client = gspread.authorize(creds)
+		sheet = client.open("Wayllapampa").sheet1  # Open the spreadhseet
+		# print(sheet)
+		data = sheet.get_all_records()
+		if datos.id_revision_id== None:
+			revision="-"
+		else:
+			revision= datos.id_revision_id
+			revision=Revision.objects.get(id=revision).fecha.strftime("%d/%m/%Y %H:%M:%S")
+			# print(revision.strftime("%d/%m/%Y %H:%M:%S"))
+		insertRow = [
+		datos.fecha.strftime("%d/%m/%Y"),
+		datos.fecha.strftime("%H:%M:%S"),
+		datos.nombre,
+		datos.clima,
+		datos.peso,
+		datos.comida,
+		datos.humedad,
+		datos.t_int,
+		datos.t_ext,
+		datos.piquera,
+		revision
+
+		]
+		sheet.append_row(insertRow)
+		response={
+		"value": "Correcto"
+		}
+		return Response(response)		
+
+
+		# except :
+		# 	response={
+		# 	"value": "Error"
+		# 	}
+		# 	return Response(response)	
+
+
+class agregar_no_revisado(generics.CreateAPIView):  # READY
 
 	authentication_classes = [authentication.TokenAuthentication]
 	permission_classes = [permissions.IsAuthenticated]
 	def post(self, request, *args, **kwargs):
 		try:
-			nombre = request.data.get("nombre")
-			local = request.data.get("local")
-			clima = request.data.get("clima")
-			exterior = float(request.data.get("t_ext"))
-			exterior=round(exterior,2)
+			nombre=request.data.get("nombre")
 			interior = float(request.data.get("t_int"))
 			interior=round(interior,2)
-			humedad = float(request.data.get("humedad"))
-			humedad=round(humedad,2)
-			peso = float(request.data.get("peso"))
-			peso=round(peso,2)
-			comida = float(request.data.get("comida"))
-			comida=round(comida,2)
-			piquera = request.data.get("piquera")
-			# print(nombre)
-			dato = Revision.objects.filter(nombre=nombre).last()
-			# print(dato)
-			# if len(dato)==0:
-			# 	dato=None
-			# else:
-			# 	dato=dato[0].id
-			# print("aqui")
-			Add_data.objects.create(
-					nombre=nombre,
-					local=local,
-					clima=clima,
-					t_ext=exterior,
-					t_int=interior,
-					humedad=humedad,
-					peso=peso,
-					comida=comida,
-					piquera=piquera,
-					id_revision=dato,
-					)
+			# nombre=request.data.get("nombre")
+			datos=No_revisado.objects.create( nombre=nombre,t_int=interior)
+			direc=str(pathlib.Path().absolute())+"/restbee_app/keys.json"
+			# print(direc)
+			scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+			creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
+			client = gspread.authorize(creds)
+			sheet = client.open("Wayllapampa").worksheet('no_supervisados') # Open the spreadhseet
+			# print(sheet)
+			data = sheet.get_all_records()
 
+			insertRow = [
+			datos.fecha.strftime("%d/%m/%Y"),
+			datos.fecha.strftime("%H:%M:%S"),
+			datos.nombre,
+			datos.t_int,
+
+
+			]
+			sheet.append_row(insertRow)
 			response={
 			"value": "Correcto"
 			}
-			return Response(response)		
-
-
+			return Response(response)
 		except :
 			response={
 			"value": "Error"
 			}
 			return Response(response)	
 
+class agregar_error(APIView):  # READY
 
-class agregar_no_revisado(generics.CreateAPIView):  # READY
+	authentication_classes = [authentication.TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
+	def post(self, request, *args, **kwargs):
+		try:
+			error=request.data.get("error")
+			# nombre=request.data.get("nombre")
+			datos=Errors.objects.create( error=error)
+			direc=str(pathlib.Path().absolute())+"/restbee_app/keys.json"
+			# print(direc)
+			scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+			creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
+			client = gspread.authorize(creds)
+			sheet = client.open("Wayllapampa").worksheet('error') # Open the spreadhseet
+			# print(sheet)
+			data = sheet.get_all_records()
 
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = No_revisado.objects.all()
-    serializer_class = No_revisado_Serializer
+			insertRow = [
+			datos.fecha.strftime("%d/%m/%Y"),
+			datos.fecha.strftime("%H:%M:%S"),
+			datos.error
 
-class agregar_error(generics.CreateAPIView):  # READY
 
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = Errors.objects.all()
-    serializer_class = Errors_Serializer
-
+			]
+			sheet.append_row(insertRow)
+			response={
+			"value": "Correcto"
+			}
+			return Response(response)
+		except :
+			response={
+			"value": "Error"
+			}
+			return Response(response)	
 
 class agregar_revision(generics.CreateAPIView):  # READY
 
@@ -103,75 +184,75 @@ class agregar_revision(generics.CreateAPIView):  # READY
     queryset = Revision.objects.all()
     serializer_class = Revision_Serializer
 
-class descargar_rest(APIView):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+# class descargar_rest(APIView):
+#     authentication_classes = [authentication.TokenAuthentication]
+#     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
-        try:
-            lista=[]
-            lista.append(["ID",
-                "Fecha",
-                "Nombre",
-                "Ubicacion",
-                "Clima",
-                "Temperatura Externa",
-                "Temperatura Interna",
-                "Humedad",
-                "Peso",
-                # "Poblacion",
-                "Comida",
-                "Piquera",
-                "Revision",
-                # "Reina",
-                # "Revision",
-                ])
-            fecha1 = request.data.get("fecha1")
-            fecha2 = request.data.get("fecha2")
-            if fecha1==fecha2:
-                # print(fecha2)
-                # print(fecha1)
-                fecha2=datetime.datetime.strptime(fecha2, "%Y-%m-%d").date()
-                fecha2=fecha2+timedelta(days=1)
-                # print(fecha2)
-                # print(fecha1)
+#     def post(self, request, *args, **kwargs):
+#         try:
+#             lista=[]
+#             lista.append(["ID",
+#                 "Fecha",
+#                 "Nombre",
+#                 "Ubicacion",
+#                 "Clima",
+#                 "Temperatura Externa",
+#                 "Temperatura Interna",
+#                 "Humedad",
+#                 "Peso",
+#                 # "Poblacion",
+#                 "Comida",
+#                 "Piquera",
+#                 "Revision",
+#                 # "Reina",
+#                 # "Revision",
+#                 ])
+#             fecha1 = request.data.get("fecha1")
+#             fecha2 = request.data.get("fecha2")
+#             if fecha1==fecha2:
+#                 # print(fecha2)
+#                 # print(fecha1)
+#                 fecha2=datetime.datetime.strptime(fecha2, "%Y-%m-%d").date()
+#                 fecha2=fecha2+timedelta(days=1)
+#                 # print(fecha2)
+#                 # print(fecha1)
 
-            dato=Add_data.objects.filter(fecha__range=[fecha1, fecha2])
-            for i in range(len(dato)):
-                # print("hola")
-                try:
-                    rev=dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S")
-                    # print(dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S"))
-                except:
-                	rev="-"
-                # print(dato[i].id)
-                diccionario =[dato[i].id,
-					dato[i].fecha.strftime("%Y-%m-%d %H:%M:%S") ,
-					dato[i].nombre,
-					dato[i].local,
-					dato[i].clima,
-					dato[i].t_ext,
-					dato[i].t_int,
-					dato[i].humedad,
-					dato[i].peso,
-					# dato[i].poblacion,
-					dato[i].comida,
-					dato[i].piquera,
-					# dato[i].piquera,
-					rev,
-					# dato[i].reina,
-					# dato[i].revision.strftime("%Y-%m-%d %H:%M:%S"),
-					]  
+#             dato=Add_data.objects.filter(fecha__range=[fecha1, fecha2])
+#             for i in range(len(dato)):
+#                 # print("hola")
+#                 try:
+#                     rev=dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S")
+#                     # print(dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S"))
+#                 except:
+#                 	rev="-"
+#                 # print(dato[i].id)
+#                 diccionario =[dato[i].id,
+# 					dato[i].fecha.strftime("%Y-%m-%d %H:%M:%S") ,
+# 					dato[i].nombre,
+# 					dato[i].local,
+# 					dato[i].clima,
+# 					dato[i].t_ext,
+# 					dato[i].t_int,
+# 					dato[i].humedad,
+# 					dato[i].peso,
+# 					# dato[i].poblacion,
+# 					dato[i].comida,
+# 					dato[i].piquera,
+# 					# dato[i].piquera,
+# 					rev,
+# 					# dato[i].reina,
+# 					# dato[i].revision.strftime("%Y-%m-%d %H:%M:%S"),
+# 					]  
     
-                lista.append(diccionario)
+#                 lista.append(diccionario)
 
-            return Response(lista)
-        except:
-            dato = None
-            diccionario = {
-                "value": "Error",
-            }
-            return Response(diccionario)
+#             return Response(lista)
+#         except:
+#             dato = None
+#             diccionario = {
+#                 "value": "Error",
+#             }
+#             return Response(diccionario)
 
 ###########################################################
 #-----------------------vistas web ------------------------
@@ -230,15 +311,15 @@ def about(request):
 
 	
 
-@login_required
-def descargar(request):
-	return render(request,"descargar.html")
+# @login_required
+# def descargar(request):
+# 	return render(request,"descargar.html")
 
 @login_required
 def error(request):
 	try:
 		if request.method == "GET":
-			error1=Errors.objects.filter(fecha__range=[now()-timedelta(days=30), now()])
+			error1=Errors.objects.filter(fecha__range=[now()-timedelta(days=7), now()])
 			# print(error)
 			error=error1.order_by('-fecha')
 			diccionario = {

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bee-project-345221",
+  "private_key_id": "1a0ed83543b7feee0ded2c898ae1302ae40371c9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1SGB2F2vkLcQD\ni3kzrxRHnlGW2684II0HOouWdxZtwH/Hq5BAPVsjM5lwQ6lzfgYkd2wNOhVY274u\nsaP7SCb9tSySpltNMhQNmFDn6folpouKc+2qP1l9YuDZTAbffBwcfZtZvsLNE/P2\nafaO51RStVv7f9kqa1Nn/l102Z75P0Fohi+1yHp4uhQEsYkk2VxwCjFdtnlakRwI\n9VmzsAeq4Of6p8aREWkWqqnWLOhBtY3GWsgZrGXNL6byYy3eW/QKjghiSPiPum0M\nNh53l3+JrfJ8Hy8nGQ2JpvTvvcn6BNLcVPHzUYsO26NXMzrfE+7Y/ysWGwSsRfxl\nq+/I94dVAgMBAAECggEAIeOXYMwtF7l0gMMkk8RhkqfmkcCcx23SX20S5jx5/Wd0\nm8OXUmMF9BUz1HhZp6UCCfQnR2u5zOQ7b+g2gwWwgFJLtFiUDeDUPdxhF5G2eS5i\nvK3CWsa/+IAxD342dLXzXWIf1g2ixgq6WzDg7kMRkOqleOUkGFl6/KBhITSDkw1v\nAPT5Ro62PPNua/f7L1V1Vm1oZCjakKkEsxsh6Cd0IYikSJdJP5WFErKoycIWzXcx\nt4E2nHVVgw6/gxaljN6DI+X71HXCmMYu8/tqN2i65fL1DoMdlRil0Egb/Y5ItaFX\nSKHxUcvHgIQsyOLTxB7eUXnRks9D9QGldKenqGPCkQKBgQDktS0wj91k+1pFwYMM\nrCfq1LwstVAKlrG3hGa70lyUDlEYyp719Ki0iOXTjb8ElpqFFFpQ8O37vSj4RD5J\nG/QKsZNEnH4ofiGFN6/BeHGiVL8E+HdukSOys5S/dG+UmZ+Mn0xdjQh/tSgwsMTB\nOCHBrUQgPWYIPulVP68gzYZ4KQKBgQDK6mhRjxXJuDj8Fo+9mzWX2P5I/qwP2PRP\n1tYUJxE6ZnU2msRFWIj+79YribLXxxsCXsw8KEuy/WR1nkqovK3j1+/6WkM7VaXT\nG+KqIBHZrqGSqWYzkZjPnJQ8POVJgtSF9aETSCmchoSVaIl6tVxrnrcU56vkFrzl\n3r4K63KrTQKBgQCUMTUrzzxUb22p316r+m0PA3M+wOkxQz26POdYclEcej5gAwKH\nOlWKTV4l+yW3smJDMtHmuoZp5MLEQ2vccWlq+G8FOSWh1UChElkm0oVG+wSfEuRI\nV3E7HJOYjriyH+y68IlJ4NWN8nMtQYzr6hQta7jF7yLK2wDUBSTT63hjKQKBgBbW\nawdC42Dgqwk0QNlGLrH4aiYtA5CFCnox48ZA31+DSI3svUpQvJp0w9YCmW5PqmqJ\n4NKkdmCexD+4oQ58rdWG6Ct1HTwAV7l62ffrxBaL4QNwrWAAcwJqzQQ6llO/tcud\n6ZMR/BzxxtpJ+a8l2lECe/iOWnpBVOFKQHlaJn3BAoGATlF4GINAdz7gyzHSmf23\ntadaKrEGj+QIfQudM4YE8YRupfA5YXfbrQaT4wfT5th+YRxzBXKl+LhKxtTrxD/5\n59AADYDVIb1ZiTyVBwVB9kE/6t4WCn1RzmucwhlNy15AVTq98SQOpqeaLJ25y1gT\nc6d7WGCvPGSNaI9DaKZ0gBA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "wayllapampa@bee-project-345221.iam.gserviceaccount.com",
+  "client_id": "110670736466987877485",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wayllapampa%40bee-project-345221.iam.gserviceaccount.com"
+}

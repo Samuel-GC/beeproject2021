@@ -1,6 +1,6 @@
 from django.db import models
 import os
-
+import datetime
 
 ###################################################################
 #--------------------model exterior-----------------------------
@@ -14,7 +14,7 @@ class Revision(models.Model):
         verbose_name = 'Datos'
         verbose_name_plural = 'Revisiones' 
     def __str__(self):
-        return f'{self.fecha} {self.nombre}'
+        return f'{self.fecha.strftime("%d/%m/%Y , %H:%M:%S")} || {self.nombre}'
 
 class Add_data(models.Model):
     fecha= models.DateTimeField(blank=True, auto_now_add=True, auto_now=False)
@@ -31,9 +31,10 @@ class Add_data(models.Model):
     # revision= models.DateTimeField(blank=True, auto_now_add=False, auto_now=True)
     class Meta:
         verbose_name = 'Datos'
-        verbose_name_plural = 'Colmenas_supervisadas' 
+        verbose_name_plural = 'Colmenas Supervisadas' 
     def __str__(self):
-        return f'{self.fecha} {self.local} {self.nombre}'
+        return f'{self.fecha.strftime("%d/%m/%Y , %H:%M:%S")} || {self.local} , {self.nombre}'
+
 
 class No_revisado(models.Model):
     fecha= models.DateTimeField(blank=True, auto_now_add=True, auto_now=False)
@@ -42,9 +43,9 @@ class No_revisado(models.Model):
     t_int= models.FloatField(blank=True,default=0)
     class Meta:
         verbose_name = 'Datos'
-        verbose_name_plural = 'Colmenas_no_supervisadas' 
+        verbose_name_plural = 'Colmenas no Supervisadas' 
     def __str__(self):
-        return f'{self.fecha} {self.local} {self.nombre}'
+        return f'{self.fecha.strftime("%d/%m/%Y , %H:%M:%S")} || {self.local} , {self.nombre}'
 
 class Errors(models.Model):
     fecha= models.DateTimeField(blank=True, auto_now_add=True, auto_now=False)
@@ -53,5 +54,5 @@ class Errors(models.Model):
         verbose_name = 'Errores'
         verbose_name_plural = 'Historial_de_errores' 
     def __str__(self):
-        return f'{self.fecha} '
+        return f'{self.fecha.strftime("%d/%m/%Y , %H:%M:%S")} '
 
