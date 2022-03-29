@@ -45,9 +45,9 @@ class agregar_data(APIView):  # READY
 		comida = float(request.data.get("comida"))
 		comida=round(comida,1)
 		piquera = request.data.get("piquera")
-		 
+
 		dato = Revision.objects.filter(nombre=nombre).last()
-	 
+
 		datos=Add_data.objects.create(
 				nombre=nombre,
 				local=local,
@@ -60,7 +60,7 @@ class agregar_data(APIView):  # READY
 				piquera=piquera,
 				id_revision=dato,
 				)
-		direc=str(pathlib.Path().absolute())+"/restbee_app/keys.json"
+		direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
 		# print(direc)
 		scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 		creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
@@ -92,14 +92,14 @@ class agregar_data(APIView):  # READY
 		response={
 		"value": "Correcto"
 		}
-		return Response(response)		
+		return Response(response)
 
 
 		# except :
 		# 	response={
 		# 	"value": "Error"
 		# 	}
-		# 	return Response(response)	
+		# 	return Response(response)
 
 
 class agregar_no_revisado(generics.CreateAPIView):  # READY
@@ -113,7 +113,7 @@ class agregar_no_revisado(generics.CreateAPIView):  # READY
 			interior=round(interior,2)
 			# nombre=request.data.get("nombre")
 			datos=No_revisado.objects.create( nombre=nombre,t_int=interior)
-			direc=str(pathlib.Path().absolute())+"/restbee_app/keys.json"
+			direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
 			# print(direc)
 			scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 			creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
@@ -139,7 +139,7 @@ class agregar_no_revisado(generics.CreateAPIView):  # READY
 			response={
 			"value": "Error"
 			}
-			return Response(response)	
+			return Response(response)
 
 class agregar_error(APIView):  # READY
 
@@ -150,7 +150,7 @@ class agregar_error(APIView):  # READY
 			error=request.data.get("error")
 			# nombre=request.data.get("nombre")
 			datos=Errors.objects.create( error=error)
-			direc=str(pathlib.Path().absolute())+"/restbee_app/keys.json"
+			direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
 			# print(direc)
 			scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 			creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
@@ -175,7 +175,7 @@ class agregar_error(APIView):  # READY
 			response={
 			"value": "Error"
 			}
-			return Response(response)	
+			return Response(response)
 
 class agregar_revision(generics.CreateAPIView):  # READY
 
@@ -242,8 +242,8 @@ class agregar_revision(generics.CreateAPIView):  # READY
 # 					rev,
 # 					# dato[i].reina,
 # 					# dato[i].revision.strftime("%Y-%m-%d %H:%M:%S"),
-# 					]  
-    
+# 					]
+
 #                 lista.append(diccionario)
 
 #             return Response(lista)
@@ -304,12 +304,12 @@ def instrucciones(request):
 	return render(request,"instrucciones.html")
 
 
-	
+
 @login_required
 def about(request):
 	return render(request,"aboutus.html")
 
-	
+
 
 # @login_required
 # def descargar(request):
@@ -323,7 +323,7 @@ def error(request):
 			# print(error)
 			error=error1.order_by('-fecha')
 			diccionario = {
-			
+
 			"error":error,
 
 			}
@@ -332,9 +332,9 @@ def error(request):
 		else:
 			return render(request,"bee.html")
 	except:
-		return redirect('/accounts/login/')	
+		return redirect('/accounts/login/')
 	# return render(request,"error.html")
-	
+
 
 def about2(request):
 	return render(request,"aboutus2.html")
