@@ -17,6 +17,7 @@ urlpatterns = [
     path('add_data/cns/',agregar_no_revisado.as_view()),
     path('add_data/revision/',agregar_revision.as_view()),
     path('add_error/',agregar_error.as_view()),
+    path('test/',test.as_view()),
 ########################-Rest - JS-########################
 	# path("web/descargar/",descargar_rest.as_view()),
 ###################################################################

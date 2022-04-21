@@ -44,6 +44,8 @@ class agregar_data(APIView):  # READY
 		peso=round(peso,2)
 		comida = float(request.data.get("comida"))
 		comida=round(comida,1)
+		if comida <=0:
+		    comida=0
 		piquera = request.data.get("piquera")
 
 		dato = Revision.objects.filter(nombre=nombre).last()
@@ -74,13 +76,17 @@ class agregar_data(APIView):  # READY
 			revision= datos.id_revision_id
 			revision=Revision.objects.get(id=revision).fecha.strftime("%d/%m/%Y %H:%M:%S")
 			# print(revision.strftime("%d/%m/%Y %H:%M:%S"))
+		if comida ==0:
+		    comida="No hay alimentador"
+		else:
+		    comida=datos.comida
 		insertRow = [
 		datos.fecha.strftime("%d/%m/%Y"),
 		datos.fecha.strftime("%H:%M:%S"),
 		datos.nombre,
 		datos.clima,
 		datos.peso,
-		datos.comida,
+		comida,
 		datos.humedad,
 		datos.t_int,
 		datos.t_ext,
@@ -253,7 +259,39 @@ class agregar_revision(generics.CreateAPIView):  # READY
 #                 "value": "Error",
 #             }
 #             return Response(diccionario)
+class test(APIView):  # READY
 
+	authentication_classes = [authentication.TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
+	def post(self, request, *args, **kwargs):
+		# try:
+		test=request.data.get("test")
+		# # nombre=request.data.get("nombre")
+		# datos=Errors.objects.create( error=error)
+		direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
+		# print(direc)
+		scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+		creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
+		client = gspread.authorize(creds)
+		sheet = client.open("Wayllapampa").worksheet('test') # Open the spreadhseet
+		# print(sheet)
+		data = sheet.get_all_records()
+
+		insertRow = [
+		test
+
+
+		]
+		sheet.append_row(insertRow)
+		response={
+		"value": "Correcto"
+		}
+		return Response(response)
+		# except :
+		# 	response={
+		# 	"value": "Error"
+		# 	}
+		# 	return Response(response)
 ###########################################################
 #-----------------------vistas web ------------------------
 ###########################################################
@@ -263,41 +301,46 @@ def Login(request):
 
 @login_required
 def bee(request):
-	try:
-		if request.method == "GET":
-			current_user = request.user.username
+    try:
+        if request.method == "GET":
+            current_user = request.user.username
 
-			col1 = Add_data.objects.filter(nombre="colmena_1").last()
-			col2 = Add_data.objects.filter(nombre="colmena_2").last()
-			# col3 = Add_data.objects.filter(nombre="colmena_3").last()
-			col1_r = Revision.objects.filter(nombre="colmena_1").last()
-			col2_r = Revision.objects.filter(nombre="colmena_2").last()
-			# col3_ = Add_data.objects.filter(nombre="colmena_3").last()
-			col_ns_1 = No_revisado.objects.filter(nombre="colmena_ns_1").last()
-			col_ns_2 = No_revisado.objects.filter(nombre="colmena_ns_2").last()
-			# print(now())
-			error1 = Errors.objects.filter(fecha__range=[now()-timedelta(days=1), now()])
-			error=len(error1)
-			# print(error)
-			# urgente=pedidos_generados.filter(prioridad_pedido="Urgente")
-			# regular=pedidos_generados.filter(prioridad_pedido="Regular")
-			diccionario = {
-			"usuario":current_user.capitalize(),
-			"col_s_1":col1,
-			"col_s_2":col2 ,
-			"revision_1":col1_r,
-			"revision_2":col2_r ,
-			# "col_s_3":col3 ,
-			"col_n_1":col_ns_1 ,
-			"col_n_2":col_ns_2,
-			"error":error,
-			}
-			return render(request,"bee.html",diccionario)
+            col1 = Add_data.objects.filter(nombre="colmena_1").last()
+            col2 = Add_data.objects.filter(nombre="colmena_2").last()
+            # col3 = Add_data.objects.filter(nombre="colmena_3").last()
+            col1_r = Revision.objects.filter(nombre="colmena_1").last()
+            col2_r = Revision.objects.filter(nombre="colmena_2").last()
+            # col3_ = Add_data.objects.filter(nombre="colmena_3").last()
+            col_ns_1 = No_revisado.objects.filter(nombre="colmena_ns_1").last()
+            col_ns_2 = No_revisado.objects.filter(nombre="colmena_ns_2").last()
+            # print(now())
+            error1 = Errors.objects.filter(fecha__range=[now()-timedelta(days=1), now()])
+            error=len(error1)
+            # print(error)
+            # urgente=pedidos_generados.filter(prioridad_pedido="Urgente")
+            # regular=pedidos_generados.filter(prioridad_pedido="Regular")
+            if col1.comida <=0:
+                comida_1="No hay alimentador"
+            else:
+                comida_1=str(col1.comida)+" %"
+            diccionario = {
+            "usuario":current_user.capitalize(),
+            "col_s_1":col1,
+            "col_s_2":col2 ,
+            "revision_1":col1_r,
+            "revision_2":col2_r ,
+            # "col_s_3":col3 ,
+            "col_n_1":col_ns_1 ,
+            "col_n_2":col_ns_2,
+            "error":error,
+            "comida_1":comida_1,
+            }
+            return render(request,"bee.html",diccionario)
 
-		else:
-			return render(request,"bee.html")
-	except:
-		return redirect('/accounts/login/')
+        else:
+            return render(request,"bee.html")
+    except:
+        return redirect('/accounts/login/')
 
 @login_required
 def instrucciones(request):
