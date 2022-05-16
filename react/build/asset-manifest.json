@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.81972082.css",
+    "main.js": "/static/js/main.65dca1a1.js",
+    "static/media/img3.jpg": "/static/media/img3.4f022911afae262e8822.jpg",
+    "static/media/img2.jpeg": "/static/media/img2.2cf05dfe9ec18a9b68b7.jpeg",
+    "static/media/img1.jpg": "/static/media/img1.1bb08f9621fad93c5d68.jpg",
+    "static/media/bee-hive.png": "/static/media/bee-hive.5b9abb4cb8afda5daafa.png",
+    "index.html": "/index.html",
+    "main.81972082.css.map": "/static/css/main.81972082.css.map",
+    "main.65dca1a1.js.map": "/static/js/main.65dca1a1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.81972082.css",
+    "static/js/main.65dca1a1.js"
+  ]
+}
