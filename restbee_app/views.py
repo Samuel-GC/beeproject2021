@@ -190,194 +190,36 @@ class agregar_revision(generics.CreateAPIView):  # READY
     queryset = Revision.objects.all()
     serializer_class = Revision_Serializer
 
-# class descargar_rest(APIView):
-#     authentication_classes = [authentication.TokenAuthentication]
-#     permission_classes = [permissions.IsAuthenticated]
-
-#     def post(self, request, *args, **kwargs):
-#         try:
-#             lista=[]
-#             lista.append(["ID",
-#                 "Fecha",
-#                 "Nombre",
-#                 "Ubicacion",
-#                 "Clima",
-#                 "Temperatura Externa",
-#                 "Temperatura Interna",
-#                 "Humedad",
-#                 "Peso",
-#                 # "Poblacion",
-#                 "Comida",
-#                 "Piquera",
-#                 "Revision",
-#                 # "Reina",
-#                 # "Revision",
-#                 ])
-#             fecha1 = request.data.get("fecha1")
-#             fecha2 = request.data.get("fecha2")
-#             if fecha1==fecha2:
-#                 # print(fecha2)
-#                 # print(fecha1)
-#                 fecha2=datetime.datetime.strptime(fecha2, "%Y-%m-%d").date()
-#                 fecha2=fecha2+timedelta(days=1)
-#                 # print(fecha2)
-#                 # print(fecha1)
-
-#             dato=Add_data.objects.filter(fecha__range=[fecha1, fecha2])
-#             for i in range(len(dato)):
-#                 # print("hola")
-#                 try:
-#                     rev=dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S")
-#                     # print(dato[i].id_revision.fecha.strftime("%Y-%m-%d %H:%M:%S"))
-#                 except:
-#                 	rev="-"
-#                 # print(dato[i].id)
-#                 diccionario =[dato[i].id,
-# 					dato[i].fecha.strftime("%Y-%m-%d %H:%M:%S") ,
-# 					dato[i].nombre,
-# 					dato[i].local,
-# 					dato[i].clima,
-# 					dato[i].t_ext,
-# 					dato[i].t_int,
-# 					dato[i].humedad,
-# 					dato[i].peso,
-# 					# dato[i].poblacion,
-# 					dato[i].comida,
-# 					dato[i].piquera,
-# 					# dato[i].piquera,
-# 					rev,
-# 					# dato[i].reina,
-# 					# dato[i].revision.strftime("%Y-%m-%d %H:%M:%S"),
-# 					]
-
-#                 lista.append(diccionario)
-
-#             return Response(lista)
-#         except:
-#             dato = None
-#             diccionario = {
-#                 "value": "Error",
-#             }
-#             return Response(diccionario)
+ 
 class test(APIView):  # READY
 
 	authentication_classes = [authentication.TokenAuthentication]
 	permission_classes = [permissions.IsAuthenticated]
 	def post(self, request, *args, **kwargs):
-		# try:
-		test=request.data.get("test")
-		# # nombre=request.data.get("nombre")
-		# datos=Errors.objects.create( error=error)
-		direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
-		# print(direc)
-		scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
-		creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
-		client = gspread.authorize(creds)
-		sheet = client.open("Wayllapampa").worksheet('test') # Open the spreadhseet
-		# print(sheet)
-		data = sheet.get_all_records()
+		try:
+			test=request.data.get("test")
 
-		insertRow = [
-		test
+			direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
+			 
+			scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+			creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
+			client = gspread.authorize(creds)
+			sheet = client.open("Wayllapampa").worksheet('test') # Open the spreadhseet
+			# print(sheet)
+			data = sheet.get_all_records()
 
-
-		]
-		sheet.append_row(insertRow)
-		response={
-		"value": "Correcto"
-		}
-		return Response(response)
-		# except :
-		# 	response={
-		# 	"value": "Error"
-		# 	}
-		# 	return Response(response)
-###########################################################
-#-----------------------vistas web ------------------------
-###########################################################
-def Login(request):
-	return redirect('/accounts/login/')
+			insertRow = [
+			test
 
 
-@login_required
-def bee(request):
-    try:
-        if request.method == "GET":
-            current_user = request.user.username
-
-            col1 = Add_data.objects.filter(nombre="colmena_1").last()
-            col2 = Add_data.objects.filter(nombre="colmena_2").last()
-            # col3 = Add_data.objects.filter(nombre="colmena_3").last()
-            col1_r = Revision.objects.filter(nombre="colmena_1").last()
-            col2_r = Revision.objects.filter(nombre="colmena_2").last()
-            # col3_ = Add_data.objects.filter(nombre="colmena_3").last()
-            col_ns_1 = No_revisado.objects.filter(nombre="colmena_ns_1").last()
-            col_ns_2 = No_revisado.objects.filter(nombre="colmena_ns_2").last()
-            # print(now())
-            error1 = Errors.objects.filter(fecha__range=[now()-timedelta(days=1), now()])
-            error=len(error1)
-            # print(error)
-            # urgente=pedidos_generados.filter(prioridad_pedido="Urgente")
-            # regular=pedidos_generados.filter(prioridad_pedido="Regular")
-            if col1.comida <=0:
-                comida_1="No hay alimentador"
-            else:
-                comida_1=str(col1.comida)+" %"
-            diccionario = {
-            "usuario":current_user.capitalize(),
-            "col_s_1":col1,
-            "col_s_2":col2 ,
-            "revision_1":col1_r,
-            "revision_2":col2_r ,
-            # "col_s_3":col3 ,
-            "col_n_1":col_ns_1 ,
-            "col_n_2":col_ns_2,
-            "error":error,
-            "comida_1":comida_1,
-            }
-            return render(request,"bee.html",diccionario)
-
-        else:
-            return render(request,"bee.html")
-    except:
-        return redirect('/accounts/login/')
-
-@login_required
-def instrucciones(request):
-	return render(request,"instrucciones.html")
-
-
-
-@login_required
-def about(request):
-	return render(request,"aboutus.html")
-
-
-
-# @login_required
-# def descargar(request):
-# 	return render(request,"descargar.html")
-
-@login_required
-def error(request):
-	try:
-		if request.method == "GET":
-			error1=Errors.objects.filter(fecha__range=[now()-timedelta(days=7), now()])
-			# print(error)
-			error=error1.order_by('-fecha')
-			diccionario = {
-
-			"error":error,
-
+			]
+			sheet.append_row(insertRow)
+			response={
+			"value": "Correcto"
 			}
-			return render(request,"error.html",diccionario)
-
-		else:
-			return render(request,"bee.html")
-	except:
-		return redirect('/accounts/login/')
-	# return render(request,"error.html")
-
-
-def about2(request):
-	return render(request,"aboutus2.html")
+			return Response(response)
+		except :
+			response={
+			"value": "Error"
+			}
+			return Response(response)
