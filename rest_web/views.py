@@ -24,7 +24,10 @@ class LoginWeb(APIView):
 
 	# authentication_classes = [SessionAuthentication, BasicAuthentication]
 	permission_classes = [permissions.AllowAny]
-
+	# authentication_classes = [authentication.TokenAuthentication]
+	# permission_classes = [permissions.IsAuthenticated]
+	# authentication_classes = [SessionAuthentication, BasicAuthentication]
+	# permission_classes = [IsAuthenticated]
 	def post(self, request, *args, **kwargs):
 
 		try:
@@ -84,12 +87,12 @@ class Data_index(APIView):
 			datos=Add_data.objects.filter(nombre="colmena_1").last()
 		 
 			ultima_revision=datos.id_revision.fecha
-			ultima_revision=ultima_revision.strftime("%d/%m/%Y a las %H:%M:%S")
+			ultima_revision=ultima_revision.strftime("%d/%m/%Y - %H:%M:%S")
 			error1 = Errors.objects.filter(fecha__range=[now()-timedelta(days=1), now()])
 			error=len(error1)
 			response={
 					"value":"correcto",
-					"fecha":datos.fecha.strftime("%d/%m/%Y, %H:%M:%S"),
+					"fecha":datos.fecha.strftime("%d/%m/%Y - %H:%M:%S"),
 					"nombre":datos.nombre,
 					"local":datos.local,
 					"clima":datos.clima,
@@ -150,17 +153,14 @@ class Datos_colmena(APIView):
 		datos=Add_data.objects.filter(nombre=colmena).last()
 	 
 		ultima_revision=datos.id_revision.fecha
-		# print(ultima_revision)
-		# ultima_revision=ultima_revision.strftime("%d/%m/%Y a las %H:%M:%S")
-		# error1 = Errors.objects.filter(fecha__range=[now()-timedelta(days=1), now()])
-		# error=len(error1)
+ 
 		if datos.comida==0:
 			comida="No hay alimentador"
 		else:
 			comida=str(datos.comida)+ " %"
 		response={
 				"value":"correcto",
-				"fecha":datos.fecha.strftime("%d/%m/%Y a las %H:%M:%S"),
+				"fecha":datos.fecha.strftime("%d/%m/%Y - %H:%M:%S"),
 				"nombre":datos.nombre,
 				"local":datos.local,
 				"clima":datos.clima,
@@ -170,8 +170,7 @@ class Datos_colmena(APIView):
 				"peso":datos.peso,
 				"comida":comida,
 				"piquera":datos.piquera,
-				"revision":ultima_revision.strftime("%d/%m/%Y a las %H:%M:%S"),
-				# "error":error,
+				"revision":ultima_revision.strftime("%d/%m/%Y - %H:%M:%S"),
 
 				}
 		return Response(response,status=status.HTTP_200_OK)
@@ -300,9 +299,6 @@ class Grafico_comida(APIView):
 					"value":"correcto",
 					"fechas":reverse_fechas,
 					"comida":reverse_com,
-					 
-	 
-
 					}
 			return Response(response,status=status.HTTP_200_OK)
 
@@ -345,8 +341,7 @@ class Grafico_peso(APIView):
 				 
 					fechas.append(dia2)
 					peso.append(promedio)
-					 
-		 
+					 	 
 				except:
 					fechas.append("-")
 					peso.append(0)
@@ -358,9 +353,6 @@ class Grafico_peso(APIView):
 					"value":"correcto",
 					"fechas":reverse_fechas,
 					"peso":reverse_peso,
-					 
-	 
-
 					}
 			return Response(response,status=status.HTTP_200_OK)
 
@@ -369,4 +361,36 @@ class Grafico_peso(APIView):
 			response={
 			"value": "Error",
 			}
+			return Response(response,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class Error_data(APIView):
+
+	authentication_classes = [authentication.TokenAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
+
+	def post(self, request, *args, **kwargs):
+		try:
+			lista=[]
+			hoy=now().date()
+			print(hoy)
+			datos=Errors.objects.filter(fecha__range=[hoy-timedelta(days=7),hoy+timedelta(days=1)])
+			print(datos)
+			for i in range ( len (datos)):
+
+				response={
+						"value":"correcto",
+						"fecha":datos[i].fecha.strftime("%d/%m/%Y - %H:%M:%S"),
+						"nombre":"colmena_1",
+						"problema":datos[i].error,
+
+						}
+				lista.append(response)
+			return Response(lista,status=status.HTTP_200_OK)
+		except:
+			response={
+				"value":"error",
+				"mensaje":"fallo"
+				}
+
 			return Response(response,status=status.HTTP_500_INTERNAL_SERVER_ERROR)

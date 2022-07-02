@@ -30,82 +30,80 @@ class agregar_data(APIView):  # READY
 	authentication_classes = [authentication.TokenAuthentication]
 	permission_classes = [permissions.IsAuthenticated]
 	def post(self, request, *args, **kwargs):
-		# try:
-		nombre = request.data.get("nombre")
-		local = request.data.get("local")
-		clima = request.data.get("clima")
-		exterior = float(request.data.get("t_ext"))
-		exterior=round(exterior,2)
-		interior = float(request.data.get("t_int"))
-		interior=round(interior,2)
-		humedad = float(request.data.get("humedad"))
-		humedad=round(humedad,2)
-		peso = float(request.data.get("peso"))
-		peso=round(peso,2)
-		comida = float(request.data.get("comida"))
-		comida=round(comida,1)
-		if comida <=0:
-		    comida=0
-		piquera = request.data.get("piquera")
+		try:
+			nombre = request.data.get("nombre")
+			local = request.data.get("local")
+			clima = request.data.get("clima")
+			exterior = float(request.data.get("t_ext"))
+			exterior=round(exterior,2)
+			interior = float(request.data.get("t_int"))
+			interior=round(interior,2)
+			humedad = float(request.data.get("humedad"))
+			humedad=round(humedad,2)
+			peso = float(request.data.get("peso"))
+			peso=round(peso,2)
+			comida = float(request.data.get("comida"))
+			comida=round(comida,1)
+			if comida <=0:
+			    comida=0
+			piquera = request.data.get("piquera")
 
-		dato = Revision.objects.filter(nombre=nombre).last()
+			dato = Revision.objects.filter(nombre=nombre).last()
 
-		datos=Add_data.objects.create(
-				nombre=nombre,
-				local=local,
-				clima=clima,
-				t_ext=exterior,
-				t_int=interior,
-				humedad=humedad,
-				peso=peso,
-				comida=comida,
-				piquera=piquera,
-				id_revision=dato,
-				)
-		direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
-		# print(direc)
-		scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
-		creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
-		client = gspread.authorize(creds)
-		sheet = client.open("Wayllapampa").sheet1  # Open the spreadhseet
-		# print(sheet)
-		data = sheet.get_all_records()
-		if datos.id_revision_id== None:
-			revision="-"
-		else:
-			revision= datos.id_revision_id
-			revision=Revision.objects.get(id=revision).fecha.strftime("%d/%m/%Y %H:%M:%S")
-			# print(revision.strftime("%d/%m/%Y %H:%M:%S"))
-		if comida ==0:
-		    comida="No hay alimentador"
-		else:
-		    comida=datos.comida
-		insertRow = [
-		datos.fecha.strftime("%d/%m/%Y"),
-		datos.fecha.strftime("%H:%M:%S"),
-		datos.nombre,
-		datos.clima,
-		datos.peso,
-		comida,
-		datos.humedad,
-		datos.t_int,
-		datos.t_ext,
-		datos.piquera,
-		revision
-
-		]
-		sheet.append_row(insertRow)
-		response={
-		"value": "Correcto"
-		}
-		return Response(response)
+			datos=Add_data.objects.create(
+					nombre=nombre,
+					local=local,
+					clima=clima,
+					t_ext=exterior,
+					t_int=interior,
+					humedad=humedad,
+					peso=peso,
+					comida=comida,
+					piquera=piquera,
+					id_revision=dato,
+					)
+			direc=str(pathlib.Path().absolute())+"/beeproject2021/restbee_app/keys.json"
+		 
+			scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+			creds = ServiceAccountCredentials.from_json_keyfile_name(direc, scope)
+			client = gspread.authorize(creds)
+			sheet = client.open("Wayllapampa").sheet1   
+			data = sheet.get_all_records()
+			if datos.id_revision_id== None:
+				revision="-"
+			else:
+				revision= datos.id_revision_id
+				revision=Revision.objects.get(id=revision).fecha.strftime("%d/%m/%Y %H:%M:%S")
+		 
+			if comida ==0:
+			    comida="No hay alimentador"
+			else:
+			    comida=datos.comida
+			insertRow = [
+			datos.fecha.strftime("%d/%m/%Y"),
+			datos.fecha.strftime("%H:%M:%S"),
+			datos.nombre,
+			datos.clima,
+			datos.peso,
+			comida,
+			datos.humedad,
+			datos.t_int,
+			datos.t_ext,
+			datos.piquera,
+			revision
+			]
+			sheet.append_row(insertRow)
+			response={
+			"value": "Correcto"
+			}
+			return Response(response)
 
 
-		# except :
-		# 	response={
-		# 	"value": "Error"
-		# 	}
-		# 	return Response(response)
+		except :
+			response={
+			"value": "Error"
+			}
+			return Response(response)
 
 
 class agregar_no_revisado(generics.CreateAPIView):  # READY

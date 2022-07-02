@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0df2ca6f.css",
-    "main.js": "/static/js/main.3210bb01.js",
+    "main.js": "/static/js/main.a43b054e.js",
     "static/media/img1.jpg": "/static/media/img1.96e1d2114b4945ac1ce0.jpg",
     "static/media/img3.jpg": "/static/media/img3.ed83f6eebfb3160a41f9.jpg",
     "static/media/img2.jpg": "/static/media/img2.794b9316ae27d39831ca.jpg",
@@ -10,10 +10,10 @@
     "static/media/bee-hive.png": "/static/media/bee-hive.5b9abb4cb8afda5daafa.png",
     "index.html": "/index.html",
     "main.0df2ca6f.css.map": "/static/css/main.0df2ca6f.css.map",
-    "main.3210bb01.js.map": "/static/js/main.3210bb01.js.map"
+    "main.a43b054e.js.map": "/static/js/main.a43b054e.js.map"
   },
   "entrypoints": [
     "static/css/main.0df2ca6f.css",
-    "static/js/main.3210bb01.js"
+    "static/js/main.a43b054e.js"
   ]
 }

@@ -5,35 +5,41 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.urls import path
 from restbee_app.views import *
+from web_app.views import *
+from rest_web.views import *
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
 ###################################################################
-#------------------------add data ---------------------------------
+#------------------------ REST - Service--------------------------- 
 ###################################################################
 
     path('add_data/cs/',agregar_data.as_view()),
-    path('add_data/cns/',agregar_no_revisado.as_view()),
     path('add_data/revision/',agregar_revision.as_view()),
     path('add_error/',agregar_error.as_view()),
-    path('test/',test.as_view()),
-########################-Rest - JS-########################
-	# path("web/descargar/",descargar_rest.as_view()),
+
 ###################################################################
 #------------------------ Web view---------------------------------
 ###################################################################
+
 	path('', Login), #redireccion al login principal
-	path('bee_project/', bee), #pagina principal
-	path('instructions/', instrucciones), #pagina de instrucciones
-	# path('descargar/', descargar), #pagina de descarga
-	path('about_us/', about),# about con login
-	path('historial/error/', error),# Historial de errores con login
-	path('aboutus/', about2), # about sin login
+	path('inicio/', Inicio), #pagina principal
+	path('colmena_datos/', Datos), #pagina de instrucciones
+	path('instrucciones/', Intrucciones), #pagina de descarga
+	path('nosotros/', NosotrosLogin),# Nosotros Login
+	path('nosotros_in/', Nosotros),# Nosostros dentro de la app
+	path('error/', Error), # Vista de error
 ###################################################################
-#------------------------ Login------------------------------------
-###################################################################
-
-	path("accounts/",include("django.contrib.auth.urls")) #accounts del propio django
-
+#------------------------Rest - web -------------------------------
+################################################################### 
+	path('login_web/',LoginWeb.as_view()),
+	path('index_data/',Data_index.as_view()),
+	path('list/',Colmena_list.as_view()),
+	path('datos/',Datos_colmena.as_view()),
+	path('temperatura/',Grafico_temperatura.as_view()),
+	path('humedad/',Grafico_humedad.as_view()),
+	path('comida/',Grafico_comida.as_view()),
+	path('peso/',Grafico_peso.as_view()),
+	path('error_list/',Error_data.as_view()),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
