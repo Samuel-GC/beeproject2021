@@ -10,7 +10,7 @@ Proyecto de Tesis "Diseño e implementación de un sistema telemétrico en colme
 ## Contents
 
 - [Carpetas](#Carpetas)
-- [Autores](#Autor)
+- [Autores](#Autores)
  
 ## [Carpetas](#Carpetas)
  <b><a id="">Una pequeña descripccion por carpeta de  este repositorio</a></b>
@@ -28,7 +28,7 @@ Proyecto de Tesis "Diseño e implementación de un sistema telemétrico en colme
   
 
 
-## [Autors](#Autor) ##
+## [Autores](#Autores) ##
 + Fabio Jeri
 + Samuel Garcia
  
