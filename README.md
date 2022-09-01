@@ -4,4 +4,19 @@
 
 ## Descripción
 
-Proyecto de Tesis de "DISEÑO E IMPLEMENTACIÓN DE UN SISTEMA TELEMÉTRICO EN COLMENAS DE ABEJAS PARA EL ENVÍO DE ALERTAS Y REGULACIÓN DE TEMPERATURA AUTOMÁTICA EN EL CENTRO EXPERIMENTAL WAYLLAPAMPA"
+Proyecto de Tesis "Diseño e implementación de un sistema telemétrico en colmenas de abejas para el envío de alertas y regulación de temperatura automática en el centro experimental Wayllapampa" - 2022
+
+
+## Contents
+
+- [Carpetas](#Usage)
+- [Autores](#Autor)
+ 
+
+
+
+## [Autors](#Contents) ##
++ Fabio Jeri
++ Samuel Garcia
+ 
+ 
