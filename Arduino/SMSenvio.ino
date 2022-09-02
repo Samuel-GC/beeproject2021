@@ -55,7 +55,7 @@ void EnvioData(){
   delay(4000);
   ShowSerialData();
 
-  myserial.println("AT+HTTPPARA=\"USERDATA\",\"Authorization: token c964678467cd53d0d79ca131f3463bba776d17d8\"");
+  myserial.println("AT+HTTPPARA=\"USERDATA\",\"Authorization: token ------------------------\"");
   delay(4000);
   ShowSerialData();
   myserial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
@@ -150,7 +150,7 @@ void EnvioRev(){
   delay(20000);
   ShowSerialData();
 
-  myserial.println("AT+HTTPPARA=\"USERDATA\",\"Authorization: token c964678467cd53d0d79ca131f3463bba776d17d8\"");
+  myserial.println("AT+HTTPPARA=\"USERDATA\",\"Authorization: token ------------------------\"");
   delay(4000);
   ShowSerialData();
   myserial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
@@ -261,7 +261,7 @@ void EnvioAler(){
   delay(20000);
   ShowSerialData();
 
-  myserial.println("AT+HTTPPARA=\"USERDATA\",\"Authorization: token c964678467cd53d0d79ca131f3463bba776d17d8\"");
+  myserial.println("AT+HTTPPARA=\"USERDATA\",\"Authorization: token ------------------------\"");
   delay(4000);
   ShowSerialData();
   myserial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
